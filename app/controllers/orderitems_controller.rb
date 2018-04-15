@@ -1,13 +1,6 @@
 class OrderitemsController < ApplicationController
-  module Usercart
-    private
-    def set_cart
-        @cart = Cart.find(session[:cart_id])
-        rescue ActiveRecord::RecordNotFound
-        @cart=Cart.create
-        session[:cart_id]=@cart.id
-    end
-  end
+ 
+  
   include Usercart
   before_action :set_cart, only: [:create , :destroy]
   before_action :set_orderitem, only: [:show, :edit, :update, :destroy]

@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+   include Usercart
+  before_action :set_cart, only: [:create , :destroy]
 
   # GET /orders
   # GET /orders.json
@@ -15,6 +17,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @user = User.new
+    @address = Address.new
   end
 
   # GET /orders/1/edit
@@ -25,7 +29,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    @order.cart_id = @cart.id
+    @order.total = @cart.cart_total
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
