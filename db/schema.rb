@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180415084335) do
     t.decimal "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cart_id"
+    t.integer "cart_id", default: 1
   end
 
   create_table "orders", force: :cascade do |t|
