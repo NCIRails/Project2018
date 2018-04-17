@@ -1,9 +1,16 @@
 class OrderitemsController < ApplicationController
- 
-  
-  include Usercart
-  before_action :set_cart, only: [:create , :destroy]
-  before_action :set_orderitem, only: [:show, :edit, :update, :destroy]
+  def set_cart
+   # session[:cart_id]=140
+       @cart = Cart.find_by_id(session[:cart_id])
+        if @cart==nil
+        @cart=Cart.create
+        @cart.save
+        session[:cart_id]=@cart.id
+        end
+  end
+#  include Usercart
+ before_action :set_cart, only: [:create , :destroy]
+ before_action :set_orderitem, only: [:show, :edit, :update, :destroy]
 
   # GET /orderitems
   # GET /orderitems.json
@@ -29,8 +36,11 @@ class OrderitemsController < ApplicationController
   # POST /orderitems.json
   def create
      product = Product.find(params[:id])
-   # @orderitem = @cart.orderitems.build(product: product)
-      @orderitem = @cart.add_product(product)
+       # session[:cart_id]=140
+        @cart=Cart.find(session[:cart_id])
+                          
+  #  @orderitem = @cart.orderitems.build(product: product)
+     @orderitem = @cart.add_product(product)
     
     respond_to do |format|
       if

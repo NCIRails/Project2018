@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  include Usercart
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts

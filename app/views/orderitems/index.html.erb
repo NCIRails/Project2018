@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Item_id</th>
+      <th>Order_id</th>
       <th>Cart_id</th>
       <th>Order</th>
       <th>Product</th>
@@ -19,6 +20,7 @@
     <% @orderitems.each do |orderitem| %>
       <tr>
         <td><%= orderitem.id %></td>
+        <td><%= orderitem.order_id %></td>
          <td><%= orderitem.cart_id %></td>
         <td><%= orderitem.order_id %></td>
         <td><%= orderitem.product_id %></td>
